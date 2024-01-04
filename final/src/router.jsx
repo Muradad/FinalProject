@@ -8,11 +8,14 @@ import Wishlist from "./Layouth/main/pages/Wishlist";
 import Detail from "./Layouth/main/pages/Detail";
 import Mycart from "./Layouth/main/pages/Mycart";
 import Accaunt from "./Layouth/main/pages/Accaunt";
+import AuthLayouth from "./Layouth/auth/AuthLayouth";
+import Login from "./Layouth/auth/pages/Login";
+import Register from "./Layouth/auth/pages/Register";
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <MainLayouth />,
-        children: [
+            path: "/",
+            element: <MainLayouth />,
+            children: [
             {
                 path: "/",
                 element: <Home />,
@@ -38,7 +41,7 @@ const router = createBrowserRouter([
                 element: <Wishlist />,
             },
             {
-                path: "detail",
+                path: "home/:id",
                 element: <Detail/>,
             },
             {
@@ -56,6 +59,20 @@ const router = createBrowserRouter([
            
         ],
     },
+    {
+    path: "auth",
+    element: <AuthLayouth/>,
+    children: [
+        {
+            path:"login",
+            element:<Login/>
+        },
+        {
+            path:"register",
+            element:<Register/>
+        }
+    ]
+    }
 ]);
 
 export const MainRouterDom = () => {

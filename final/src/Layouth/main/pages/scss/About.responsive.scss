@@ -27,3 +27,14 @@
 
     }
 }
+@media (max-width: 768px) {
+    .testimonial-card-container {
+      flex-direction: column;
+      align-items: center; 
+      width: 97%;
+      justify-content: center;
+    }
+  
+   
+  }
+  

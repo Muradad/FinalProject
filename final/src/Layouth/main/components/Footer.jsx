@@ -184,7 +184,7 @@ function Footer() {
                     ))}
                 </div>
 
-                <div className='hidden lg:flex lg:flex-wrap lg:justify-between w-full'>
+                <div className='hidden lg:flex lg:flex-wrap lg:justify-between w-full mx-14'>
                     {accordionData.map((item, index) => (
                         <div key={index} className='lg:w-1/4 mb-8'>
                             <h2 className='text-xl font-bold mb-4'>{item.title}</h2>

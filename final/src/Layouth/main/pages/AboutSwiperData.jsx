@@ -70,17 +70,17 @@ const testimonials = [
 
 function AboutSwiperData() {
   return (
-    <>
+    <div>
     <div className="title mt-28 text-center">
       <h1 className="text-blue-300 font-bold text-[3rem] ">What Clients Say's</h1>
       <p className="text-gray-600">Caught in the moment!</p>
     </div>
-       <div className="flex justify-center gap-10 mx-28  mt-10">
+       <div className="flex justify-center gap-10   mt-10 testimonial-card-container">
       {testimonials.map((testimonial) => (
         <TestimonialCard key={testimonial.id} {...testimonial} />
       ))}
     </div>
-    </>
+    </div>
  
   );
 }

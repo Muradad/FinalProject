@@ -42,7 +42,7 @@ function ModuleHome() {
             </div>
             <div>
               <img
-                className="max-h-48 max-w-full object-cover rounded-md"
+                className=" modulHomeImg  max-h-48 max-w-full object-cover rounded-md "
                 src="https://eme-2.myshopify.com/cdn/shop/files/mid_slider_2.png?v=1654685689"
                 alt="Product"
               />

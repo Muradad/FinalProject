@@ -9,6 +9,7 @@ import { useSpring, animated } from 'react-spring';
 import { Link } from "react-router-dom";
 import "./scss/Header.scss"
 import Basket from "./Basket";
+import LogAut from "./LogAut";
 
 function Header() {
 
@@ -68,10 +69,10 @@ function Header() {
 
   window.addEventListener('scroll', handleScroll);
   return (
-    
+  
     <animated.div className='NavbarNav flex items-center justify-between px-10 text-3xl fixed top-0 left-0 w-full z-50' style={navbarAnimation}>
       <GiHamburgerMenu onClick={handleSidebarOpen} className="cursor-pointer GiHamburgerMenu" />
-
+    
       {/* Navbar */}
       <nav className=" nav hidden md:flex flex-grow justify-center items-center w-full">
         <ul className=" navUl flex space-x-20 text-slate-700 text-[17px] justify-center items-center px-11">
@@ -118,7 +119,7 @@ function Header() {
           )}
         </Link>
         <Link>
-          <FaUserAlt className="cursor-pointer" />
+          <LogAut/>
         </Link>
         <Link to={"/wishlist"}>
           <FaHeart className="cursor-pointer" />
@@ -177,7 +178,7 @@ function Header() {
       {/* hambur */}
       <div className="MenuBarsNav">
         <div className="logo text-black ">
-          <Link className=" mt-[25px]" to={"/home"}>MyShop</Link>
+          <Link className=" mx-5 mt-2" to={"/home"}>Kotre</Link>
         </div>
       </div>
       <div>

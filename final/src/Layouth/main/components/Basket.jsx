@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdOutlineShoppingCart, MdClose } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { BasketContext } from "../../../Context/BasketContext";
 
 function Basket() {
+
+  //context
+   const { basket } = useContext(BasketContext);
+  //end
     const [basketOpen, setBasketOpen] = useState(false);
 
     const handleBasketOpen = () => {
@@ -15,9 +20,7 @@ function Basket() {
 
     return (
         <div className="relative">
-        {/* Sepetin içindeki ürün sayısını gösteren bildirim */}
-        <span className="absolute -top-5 right-[-10px] bg-red-900 text-white text-xs rounded-full p-1">0</span>
-  
+        <span className="absolute -top-5 right-[-10px] bg-red-900 text-white text-xs rounded-full p-1">{basket.length}</span>
         {/* Sepetin içeriğini gösteren sidebar */}
         <div className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl text-black transform transition-transform duration-300 ease-in-out ${basketOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           {/* Başlık ve Kapatma Butonu */}
