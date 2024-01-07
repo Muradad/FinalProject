@@ -21,7 +21,6 @@ function Login() {
           });
       
           const data = await response.json();
-          console.log(data)
           window.localStorage.setItem('access',data.access)
           window.localStorage.setItem('refresh',data.refresh)
           if (data.access){

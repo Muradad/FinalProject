@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider,} from "react-router-dom";
 import MainLayouth from "./Layouth/main/MainLayouth";
 import Home from "./Layouth/main/pages/Home";
-import Shop from "./Layouth/main/pages/Shop";
+import Shop from "./Layouth/main/pages/Filter/Shop";
 import About from "./Layouth/main/pages/About";
 import Contact from "./Layouth/main/pages/Contact";
 import Wishlist from "./Layouth/main/pages/Wishlist";

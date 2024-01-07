@@ -5,18 +5,18 @@ import "../pages/scss/Cart.scss"
 import { BasketContext } from '../../../Context/BasketContext';
 
 function Cart({product}) {
-  const {basket,setBasket} = useContext(BasketContext)
+  const {basket,setBasket,GoBasket} = useContext(BasketContext)
 
-  const addToBasket = (id) => {
-    let basketItem = basket.find((item) => {
-      return item.id === id;
-    });
-    if (!basketItem) {
-      let newArr = [...basket];
-      newArr.push({ id });
-      setBasket(newArr);
-    }
-  };
+  // const addToBasket = (id) => {
+  //   let basketItem = basket.find((item) => {
+  //     return item.id === id;
+  //   });
+  //   if (!basketItem) {
+  //     let newArr = [...basket];
+  //     newArr.push({ id });
+  //     setBasket(newArr);
+  //   }
+  // };
   
   
 
@@ -69,7 +69,7 @@ function Cart({product}) {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">{product.price} azn</span>
-          <strong onClick={()=>{addToBasket(product.id)}} className='bg-blue-950 p-2 text-gray-300 rounded-sm hover:bg-blue-900 cursor-pointer duration-500'>Sebete At</strong>
+          <strong onClick={()=>{GoBasket(product.id)}} className='bg-blue-950 p-2 text-gray-300 rounded-sm hover:bg-blue-900 cursor-pointer duration-500'>Sebete At</strong>
         </div>
       </div>
     </div>
