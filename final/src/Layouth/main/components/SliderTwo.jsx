@@ -6,8 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
-function AboutSwiperData() {
-
+const SliderTwo = () => {
   const [quotes, setQuotes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -22,14 +21,10 @@ function AboutSwiperData() {
 
     fetchData();
   }, []);
+
   return (
-    <div>
-      
-      <div className='text-center mt-20'>
-        <h1 className='text-4xl'>What Clients Say's</h1>
-        <p className='mt-7'>Caught in the moment!</p>
-      </div>
-      <Swiper
+    <>
+  <Swiper
   cssMode={true}
   navigation={{
     nextEl: '.swiper-button-next',
@@ -64,11 +59,12 @@ function AboutSwiperData() {
       </div>
     </SwiperSlide>
   ))}
-  <div className="swiper-button-next text-white bg-gray-300 p-7 rounded-full"></div>
-  <div className="swiper-button-prev text-white bg-gray-300 p-7 rounded-full "></div>
+  <div className="swiper-button-next text-white bg-gray-400  p-7 rounded-full"></div>
+  <div className="swiper-button-prev text-white bg-gray-400 p-7 rounded-full "></div>
 </Swiper>
-    </div>
-  )
-}
 
-export default AboutSwiperData
+    </>
+  );
+};
+
+export default SliderTwo;

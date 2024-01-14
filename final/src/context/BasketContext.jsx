@@ -27,20 +27,42 @@ export const BasketProvider = ({ children }) => {
         getBasketItems()
       } else {
         Swal.fire({
-            title: 'Qeydiyyat',
-            text: 'Sebete atmaq ucun qeydiyyatdan kecmelisiniz.!',
-            icon: 'warning', // You can use 'info', 'success', 'error', 'warning', etc.
-            confirmButtonText: 'Giris et', // Customize the text of the confirm button
-            cancelButtonText: 'Legv et', // Customize the text of the cancel button (if you have one)
-            showCancelButton: true, // Set to true to show the cancel button
-            reverseButtons: true, // Set to true to swap the positions of the confirm and cancel buttons
-          }).then((result) => {
-            // Check if the user clicked the "Go ahead" button
-            if (result.value) {
-              // Redirect to the desired URL
-              window.location.href = '/auth/login';
-            }
-          });
+          title: 'Qeydiyyat',
+          html: '<div style="text-align: center;">\
+                   <p>Sebete əlavə etmək üçün qeydiyyatdan keçməlisiniz.!</p>\
+                 </div>',
+          icon: 'warning', 
+          confirmButtonText: 'Qeydiyyatdan keç', 
+          cancelButtonText: 'İmtina et', 
+          showCancelButton: true,
+          reverseButtons: true, 
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire({
+              text: 'Sizi qeydiyyat səhifəsinə yönləndiririk.',
+              icon: 'success',
+              timer: 2000, // 
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then(() => {
+              if (result.value) {
+                  window.location.href = '/auth/register';
+              }
+              window.location.href = '/auth/register';
+            });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+              title: 'Əməliyyat İmtina Edildi',
+              text: 'Qeydiyyat prosesi legv edildi.',
+              icon: 'error',
+              timer: 2000,
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            });
+          }
+        });
       }
     } catch (error) {
       console.error('Bir hata oluştu:', error);

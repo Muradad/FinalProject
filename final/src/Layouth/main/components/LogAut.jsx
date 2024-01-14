@@ -60,7 +60,7 @@ function LogAut() {
             animate="visible"
             exit="hidden"
             variants={modalVariants}
-            className="fixed top-[66px]  right-[0] transform translate-x-1/2 -translate-y-1/2 shadow-2xl text-white p-10 rounded-md "
+            className="fixed top-[66px]   right-[0] transform translate-x-1/2 -translate-y-1/2  text-black p-5 rounded-md "
           >
             {logAut ? (
               <div>
@@ -71,7 +71,7 @@ function LogAut() {
                   onClick={handleLogout}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="bg-blue-300 text-black  px-10 py-2 rounded-md"
+                  className="bg-blue-900 text-white  px-10 py-. rounded-md"
                   type="button"
                 >
                   Logout

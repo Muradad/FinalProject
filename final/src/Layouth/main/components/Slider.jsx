@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -8,6 +9,7 @@ import './scss/Slider.scss'
 import 'swiper/css/effect-flip';
 import {Link} from "react-router-dom"
 import { EffectFlip } from 'swiper/modules';
+import Information from './Information';
 function Slider() {
   const [isFetchDataCompleted, setFetchDataCompleted] = useState(false);
   const [products,setProduct] = useState([])
@@ -147,6 +149,7 @@ useEffect(()=>{
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
       modules={[EffectFlip]}
+      
     >
    {products.map((product,index)=>(
     
@@ -164,9 +167,9 @@ useEffect(()=>{
          />
          <div className="content-container">
           <div className='content-cont'>
-          <p className="text-gray-600 mb-4">{product.content}</p>
-           <h2 className=" mt-10 text-6xl leading-[70px] max-w-sm mb-6 font-bold">{product.name}</h2>
-           <Link to={"/shop"} className=" uppercase px-8 py-3  bg-blue-950 text-white hover:bg-blue-800 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
+          <p className=" contentP text-gray-600 mb-4">{product.content}</p>
+           <h2 className=" contenth2 mt-10 text-6xl leading-[70px] max-w-sm mb-6 font-bold">{product.name}</h2>
+           <Link to={"/shop"} className=" shopNow uppercase px-8 py-3  bg-blue-950 text-white hover:bg-blue-800 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
              Shop now
            </Link>
           </div>
@@ -176,6 +179,7 @@ useEffect(()=>{
    </>
    </SwiperSlide>
    ))}
+     <Information/>
  
     </Swiper>
     

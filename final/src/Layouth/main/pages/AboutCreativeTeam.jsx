@@ -1,58 +1,65 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import DatamMenim from './AboutCreativeData';
-import 'tailwindcss/tailwind.css';
+import React, { useEffect, useState } from 'react';
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 
 function AboutCreativeTeam() {
-  const settings = {
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    fade: true,
-    arrows: false,
+  const [quotes, setQuotes] = useState([]);
 
-    
-    
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/test");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setQuotes(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
-    <div className='bg-gradient-to-b  from-black to-blue-200 text-white py-16 mt-32'>
-      <div className='text-center mb-12'>
-        <p className='text-sm font-extrabold text-white'>Subtitle</p>
-        <h1 className='text-blue-500 text-[3rem]'>Creative Team</h1>
-      </div>
+    <>
+      <div className='text-center mt-20'><h1 className='text-4xl font-semibold underline'>Creative Team</h1></div>
 
-      <Slider {...settings} className='mx-auto max-w-5xl'>
-        {DatamMenim.map(item => (
-          <div key={item.id} className='relative text-center'>
-            {/* Social Icons */}
-            <div className='cursor-pointer absolute top-1/2 flex left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-4 z-10'>
-              <FaFacebook className='text-blue-700 text-xl' />
-              <FaInstagram className='text-blue-900 text-xl' />
-              <FaLinkedin className='text-blue-400 text-xl' />
+      <div className="flex flex-wrap justify-center gap-10 p-8 mt-10 bg-slate-50">
+        {quotes.map((quote, index) => (
+          <div key={index} className="bg-white p-20 shadow-2xl relative ">
+
+            <div className="relative group">
+              <img
+                src={quote.image}
+                className="rounded-full w-40 h-40 object-cover mx-auto group-hover:opacity-80 transition-opacity"
+              />
+              <div className="icon-container cursor-pointer flex absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center justify-center bg-blue-500 rounded-full w-7 h-7 transition-transform transform hover:scale-110">
+                  <FaFacebookF size={20} className="text-white" />
+                </div>
+                <div className="flex items-center justify-center bg-pink-500 rounded-full w-7 h-7 transition-transform transform hover:scale-17">
+                  <FaInstagram size={20} className="text-white" />
+                </div>
+                <div className="flex items-center justify-center bg-blue-300 rounded-full w-7 h-7 transition-transform transform hover:scale-110">
+                  <FaTwitter size={20} className="text-white" />
+                </div>
+              </div>
+
             </div>
 
-            {/* User Image */}
-            <img
-              src={item.img}
-              alt={item.author}
-              className=' cursor-default mx-auto w-40 h-40 rounded-full mb-4 border-4 border-white relative z-0'
-            />
-
-            {/* User Information */}
-            <h2 className='text-3xl font-semibold mb-2 text-gray-600 '>{item.title}</h2>
-            <p className='text-white text-sm'>{item.author}</p>
+            <div className='text-center mt-10'>
+              <h1 className='text-xl font-bold '>{quote.full_name}</h1>
+              <p className='text-sm text-gray-500 '>{quote.field}</p>
+            </div>
           </div>
         ))}
-      </Slider>
-    </div>
+      </div>
+    </>
+
+
   );
 }
 

@@ -34,7 +34,7 @@ function Scrol() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 p-3 bg-black text-white rounded-full hover:bg-white hover:text-black border border-black duration-1000"
+          className=" z-50 fixed bottom-10 right-10 p-3 bg-black text-white rounded-full hover:bg-white hover:text-black border border-black duration-1000"
         >
          <FaArrowUp />
 
