@@ -11,6 +11,8 @@ import Accaunt from "./Layouth/main/pages/Accaunt";
 import AuthLayouth from "./Layouth/auth/AuthLayouth";
 import Login from "./Layouth/auth/pages/Login";
 import Register from "./Layouth/auth/pages/Register";
+import AdminLayouth from "./AdminDashboard/main/AdminLayouth";
+import AdminHome from "./AdminDashboard/main/pages/AdminHome";
 const router = createBrowserRouter([
     {
             path: "/",
@@ -71,8 +73,21 @@ const router = createBrowserRouter([
             path:"register",
             element:<Register/>
         }
+        
     ]
+    },
+    //adminDashbord
+    {
+        path: "AdminLayouth",
+        element: <AdminLayouth/>,
+        children: [
+            {
+                path: "admin",
+                element: <AdminHome/>,
+            },
+        ]
     }
+    
 ]);
 
 export const MainRouterDom = () => {
