@@ -39,7 +39,7 @@ function Cart() {
           </div>
   
           <div className="flex items-center justify-between mt-2.5">
-            <span className="text-md font-bold text-gray-900 dark:text-white">{productwf.price.toFixed(2)} azn</span>
+            <span className="text-md font-bold text-gray-900 dark:text-white">{productwf.price} azn</span>
             <div className="flex items-center space-x-2">
               <button className="text-black px-2 py-2 text-sm  rounded-lg hover:bg-red-700 hover:text-white transition-all duration-300 border border-black">Sebete At</button>
               <button className="wishlist-button bg-red-500 text-white px-4 py-2 rounded-lg border border-gray-500 hover:bg-white hover:text-black transition-all duration-300">

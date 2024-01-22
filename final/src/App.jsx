@@ -5,19 +5,29 @@ import { FilterDataResProvider } from './Layouth/main/pages/Filter/shopnavbar/Co
 import './index.css';
 import { MainRouterDom } from './router';
 import { WishlistProvider } from "./context/WishListContext";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartHomeContext";
 
 function App() {
   return (
     <>
-      <WishlistProvider>
-        <FilterDataResProvider>
-          <FilterProvider>
-            <BasketProvider>
-              <MainRouterDom />
-            </BasketProvider>
-          </FilterProvider>
-        </FilterDataResProvider>
-      </WishlistProvider>
+
+<CartProvider>
+
+
+       <AuthProvider> 
+        <WishlistProvider>
+          <FilterDataResProvider>
+            <FilterProvider>
+              <BasketProvider>
+                <MainRouterDom />
+              </BasketProvider>
+            </FilterProvider>
+          </FilterDataResProvider>
+        </WishlistProvider>
+      </AuthProvider> 
+      </CartProvider>
+
     </>
   );
 }

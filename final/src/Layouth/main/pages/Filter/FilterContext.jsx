@@ -26,9 +26,7 @@ export const FilterProvider = ({ children }) => {
       const response = await fetch(`http://127.0.0.1:8000/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,
       {
         method: 'GET',
-       headers: {
-           Authorization: `Bearer ${token}`
-       },
+       
       });
       const data = await response.json();
       console.log(`http://127.0.0.1:8000/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,'llasldalsldasd')

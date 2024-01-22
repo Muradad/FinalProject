@@ -193,12 +193,11 @@ function Footer() {
                     ))}
                 </div>
             </div>
-            {/* <div className="bg-gray-100 flex items-center justify-center ">
+            <div className="bg-gray-100 flex items-center justify-center ">
                 <animated.div style={fadeIn} className="">
-                    <p className="text-2xl font-serif italic border-b ">Murad Memmedov</p>
-                    <strong className="text-gray-500 block ">+994 077 509 7909</strong>
+                    <p className="text-sm font-serif italic border-b ">Murad Memmedov</p>
                 </animated.div>
-            </div> */}
+            </div>
         </div>
     );
 }

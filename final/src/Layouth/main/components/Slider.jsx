@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -149,7 +148,7 @@ useEffect(()=>{
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
       modules={[EffectFlip]}
-      
+      autoplay={{ delay: 3000, disableOnInteraction: false }}  // Add autoplay option
     >
    {products.map((product,index)=>(
     

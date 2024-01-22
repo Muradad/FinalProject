@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from '../components/Slider';
 import Cart from './Cart';
 import { motion } from 'framer-motion';
@@ -7,26 +7,31 @@ import CartTwo1 from '../components/CartTwo/CartTwo1';
 import CartTwo2 from '../components/CartTwo/CartTwo2';
 import CartTwp3 from '../components/CartTwo/CartTwp3';
 import SliderTwo from '../components/SliderTwo';
+import Blog from './Blog';
+import FeaturedCollectionsCart from './FeaturedCollectionsCart';
+import FollowInstagram from './FollowInstagram';
+import { CartContext, CartProvider } from '../../../context/CartHomeContext';
 
 function Home() {
   const [cartTwo, setCartTwo] = useState([]);
 
-
-  const [product, setProduct] = useState([])
-
-  const fetchData = async () => {
+  const { product,fetchData } = useContext(CartContext);
+//Featured
+  const [FeaturedCollectionsproduct, setFeaturedCollectionsproduct] = useState([])
+  const FeaturedData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/products');
+      const response = await fetch('http://127.0.0.1:8000/api/FeaturedCollection',
+      {});
       const data = await response.json();
-      setProduct(data.results)
+      setFeaturedCollectionsproduct(data)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
   useEffect(() => {
-    fetchData()
+    FeaturedData()
   }, [])
-
+  console.log(product,'-------------------------------ssssssssss--------------------')
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Slider />
@@ -45,6 +50,14 @@ function Home() {
 </div>
 <div>
 <SliderTwo/>
+<div className='flex justify-center md:space-x-10 mt-20 mb-20 flex-wrap'>
+        {FeaturedCollectionsproduct.map((feat) => (
+          <FeaturedCollectionsCart key={feat.id} FeaturedCollectionsproduct={feat} />
+
+        ))}
+      </div>
+<Blog/>
+<FollowInstagram/>
 
 </div>
 

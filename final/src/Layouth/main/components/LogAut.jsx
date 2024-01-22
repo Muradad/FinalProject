@@ -7,7 +7,7 @@ function LogAut() {
   const [logAut, setLogAut] = useState(false);
   const [userModal, setuserModal] = useState(false);
   const [name, setName] = useState('');
-
+  const [username,setUsername] = useState('')
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("access");
@@ -20,6 +20,7 @@ function LogAut() {
       if (data.token === true) {
         setLogAut(true);
         setName(data.name);
+        setUsername(data.username)
       }
     } catch (error) {
       console.error('Error fetching data:', error);

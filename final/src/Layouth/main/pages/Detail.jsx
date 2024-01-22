@@ -41,9 +41,7 @@ function Detail() {
   }
 
   // Check if product.images is defined and has at least one element
-  if (!product.images || product.images.length === 0) {
-    return <div>No images available</div>; // or handle the case when there are no images
-  }
+
   return (
     <section className="overflow-hidden bg-white py-11 font-poppins dark:bg-gray-800">
       <div className="max-w-6xl mx-auto">
@@ -51,13 +49,13 @@ function Detail() {
           <div className="lg:w-1/2">
             <div className="relative mb-6 lg:mb-10 lg:full">
               <img
-                src={product?.images[activeTab].image}
+                src={product.images && product.images.length>0?product.images[activeTab].image:product.image}
                 alt=""
                 className="object-cover w-full h-full rounded-lg"
               />
             </div>
             <div className="hidden lg:flex space-x-4">
-              {product.images.map((tab, index) => (
+              {product.images && product.images.length>0?product.images.map((tab, index) => (
                 <button
                   key={tab.id}
                   className={`flex-1 p-2 border-2 border-transparent focus:outline-none hover:border-blue-500 transition-all ${index === activeTab
@@ -68,13 +66,13 @@ function Detail() {
                 >
                   <div className="flex flex-col items-center">
                     <img
-                      src={tab.image}
+                      src={product.images && product.images.length>0?tab.image:product.image}
                       alt=""
                       className="object-cover w-full  mb-2 rounded-md h-full"
                     />
                   </div>
                 </button>
-              ))}
+              )):<></>}
             </div>
             <div className="lg:hidden">
               <button

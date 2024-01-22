@@ -113,4 +113,3 @@ useEffect(() => {
 
 
 
-// http://127.0.0.1:8000/api/blogs datani fetch ele setdata datani yox data.results u set ele sonra istifade ele

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import "./scss/Header.scss"
 import Basket from "./Basket";
 import LogAut from "./LogAut";
+import HeaderSearch from "./HeaderSearch";
 
 function Header() {
 
@@ -88,36 +89,7 @@ function Header() {
 
       {/* Icons */}
       <div className=" IconsNavbarItems flex space-x-5 text-[17px] text-gray-700" >
-        <Link>
-          <FaSearch className="cursor-pointer" onClick={handleSearchClick} />
-          {isModalOpen && (
-            //modal start
-            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 animate__animated animate__fadeIn">
-              <div className=" p-8 rounded-md shadow-lg max-w-md transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                <div className="text-center mb-6">
-                  <h2 className="text-[15px] font-extrabold mb-2 text-white uppercase">
-                  what outfit are you looking for..?
-                  </h2>
-                  <p className="text-gray-300">Explore more features and enjoy your experience!</p>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Axtar..."
-                  className=" inputSearch w-full p-2 border border-gray-300 rounded-md mb-6 focus:outline-none focus:ring focus:border-white transition-all duration-300"
-                />
-                <div className="text-center">
-                  <button
-                    onClick={closeModal}
-                    className="w-full bg-teal-500 text-white rounded-md hover:bg-teal-600 focus:outline-none focus:ring focus:border-white transition-all duration-300"
-                  >
-                    Bagla
-                  </button>
-                </div>
-              </div>
-            </div>
-            //modal end
-          )}
-        </Link>
+       <HeaderSearch/>
         <Link>
           <LogAut/>
         </Link>
@@ -182,7 +154,6 @@ function Header() {
         </div>
       </div>
       <div>
-        {/* Menü Toggle Butonu */}
         {menuOpen ? (
           <FaTimes className="text-black FaTimes" onClick={toggleMenu} />
         ) : (
@@ -195,7 +166,6 @@ function Header() {
             } transition-transform duration-300 ease-in-out`}
         >
 
-          {/* Menü İçeriği Buraya Gelebilir */}
           <div className=" bg-white shadow-2xl h-full text-center mt-20">
             {/* search */}
             <form>
@@ -216,7 +186,6 @@ function Header() {
               <Link to={"/home"} className=" NavA hover-underline"><a href="#">Home</a></Link>
               <Link to={"/shop"} className=" NavA hover-underline"><a href="#">Shop</a></Link>
               <Link to={"/about"} className=" NavA hover-underline"><a href="#">About</a></Link>
-              {/* <Link to={"/home"} className=" text-black  text-3xl uppercase"><a href="#">kotre</a></Link> */}
               <Link to={"/contact"} className=" NavA hover-underline"><a href="#">Contact</a></Link>
               <Link to={"/wishlist"} className=" NavA hover-underline"><a href="#">Wishlist</a></Link>
               <div className="flex  space-x-10 mt-16">

@@ -12,8 +12,7 @@ import Colors from './shopnavbar/Colors';
 import Availability from './shopnavbar/Availability';
 import FilterCart from './FilterCart/FilterCart';
 import FilterResponsive from './shopnavbar/FilterResponsive';
-import { useEffect } from 'react';
-import { useState } from 'react';
+
 import { useContext } from 'react';
 import { FilterResDataContext } from './shopnavbar/Context/FilterDataResContext';
 

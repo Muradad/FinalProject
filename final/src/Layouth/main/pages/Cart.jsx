@@ -1,81 +1,90 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSpring, animated } from 'react-spring';
-import { FaHeart } from 'react-icons/fa';
 import { BasketContext } from '../../../Context/BasketContext';
 import "../pages/scss/Cart.scss"
 import { WishlistContext } from '../../../context/WishListContext';
+import { AuthContext } from '../../../context/AuthContext';
+import { MdOutlineStar } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
+import { CartContext, CartProvider } from '../../../context/CartHomeContext';
 
-const Cart = ({ product }) => {
+
+ 
+function Cart({product}) {
+  const { fetchData } = useContext(CartContext);
+  const [isHovered, setIsHovered] = useState(false);
   const { basket, setBasket, GoBasket } = useContext(BasketContext);
+  const { username } = useContext(AuthContext);
   const { GoWish } = useContext(WishlistContext);
-
-  console.log(product)
-  const [hover, setHover] = useState(false);
   
-  const imageSpring = useSpring({
-    opacity: hover ? 1 : 0.9,
-    transform: hover ? 'scale(1.05)' : 'scale(1)',
-  });
+  const toggleDiv = () => {
+    setuserModal(!userModal);
+  };
+  const Wish = async (id) => {
+    try {
+      await GoWish(id);
+      await fetchData();
+    } catch (error) {
+      console.error("Wish işlemi sırasında hata oluştu:", error);
+    }
+  };
+  const isUserInWishlist = product.wishlist.some(wishlistItem => wishlistItem.username === username);
+  const dynamicClassName = isUserInWishlist
+  ? 'border border-gray-600 p-2 rounded-md hover:bg-black hover:text-white duration-500 cursor-pointer bg-red-600 text-white'
+  : 'border border-gray-600 p-2 rounded-md hover:bg-black hover:text-white duration-500 cursor-pointer bg-red-600 text-black';
 
   const newArray = Array.from({ length: product.rating }, (_, index) => index + 1);
-
-  const handleHover = (isHovered) => {
-    setHover(isHovered);
-  };
-
-
   return (
-    <div className="cart-container w-full max-w-sm overflow-hidden bg-white border rounded-md shadow-md transition-transform duration-300 transform hover:shadow-lg">
-      <div
-        className="image-container relative cursor-pointer overflow-hidden rounded-t-md"
-        onMouseOver={() => handleHover(true)}
-        onMouseOut={() => handleHover(false)}
-      >
-        <Link to={`${product.id}`} className="image-link block">
-          <animated.img className="product-image w-full h-auto" src={product.image} style={imageSpring} alt={product.name} />
-          {!hover && (
-            <img className="hover-image w-full h-auto absolute top-0 left-0" src={product.hoverimage} alt={`${product.name} hover`} />
-          )}
-        </Link>
-      </div>
-      <div className="cart-details p-5">
-        <h5 className="product-name text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          {product.name} 
-        </h5>
-        <div className="rating-container flex items-center mt-2.5 mb-5">
-          <div className="star-container flex items-center space-x-1 rtl:space-x-reverse">
-            {newArray.map((star) => (
-              <svg key={star} className="star-icon w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-            ))}
-          </div>
-          <span className="rating-count bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
-            {product.rating}
-          </span>
+    <div
+      className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Link to={`${product.id}`}>
+        <img
+          className={`h-96 rounded-t-lg w-full object-cover transition duration-1000 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+          src={product.image}
+        />
+        <img
+          className={`h-96 absolute top-0 left-0 rounded-t-lg w-full object-cover transition duration-1000 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+          src={product.hoverimage}
+          alt="hover image"
+        />
+      </Link>
+      <div className="mt-4 px-5 pb-5">
+        <div className='flex justify-between items-center'>
+          <h5 className="text-2xl font-semibold tracking-tight text-slate-900">{product.name}</h5>
+         <button  onClick={() => Wish(product.id)}
+ 
+         className={dynamicClassName}
+         > <FaHeart /></button>
+
         </div>
-        <div className="price-action-container flex items-center justify-between">
-          <span className="product-price text-3xl font-bold text-gray-900 dark:text-white">
-            {product.price} azn
-          </span>
-          <div className="action-buttons flex items-center space-x-4">
-            <button
-              onClick={() => GoBasket(product.id)}
-              className="add-to-cart-button border border-gray-500 text-black px-4 py-2 rounded-lg hover:bg-red-700 hover:text-white transition-all duration-300"
-            >
-              Add to Cart
-            </button>
-            <button  onClick={() =>GoWish(product.id)} 
-              className={`wishlist-button bg-white ${product.wish_or_not ? 'text-red-700' : 'text-black'} px-4 py-2 rounded-lg border border-gray-500 hover:bg-white hover:text-red-700 transition-all duration-300`}
-            >
-              <FaHeart />
-            </button>
+        <div className="mt-2.5 flex items-center">
+          <div class="mt-2.5 mb-5 flex items-center">
+            <span class="mr-2 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">{product.rating}</span>
+            <div className="flex items-center space-x-1 rtl:space-x-reverse">
+        {Array.from({ length: product.rating }).map((_, index) => (
+          <div key={index}><MdOutlineStar /></div>
+        ))}
+      </div>
           </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <p>
+            <span className="text-3xl font-bold text-slate-900">{product.discount_price==0?product.price:product.price-product.discount_price}</span>
+            <span className="text-sm text-slate-900 line-through">{product.discount_price==0?<></>:product.price}</span>
+          </p>
+          <button  onClick={() => GoBasket(product.id)}  className="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-400 duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className=" mr-2 h-6 w-6" fill="black" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+         Sebete At
+          </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

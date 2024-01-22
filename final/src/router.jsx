@@ -13,6 +13,11 @@ import Login from "./Layouth/auth/pages/Login";
 import Register from "./Layouth/auth/pages/Register";
 import AdminLayouth from "./AdminDashboard/main/AdminLayouth";
 import AdminHome from "./AdminDashboard/main/pages/AdminHome";
+import ItemsAdd from "./AdminDashboard/main/pages/mainAppAdd/ItemsAdd";
+import ItemsProductApp from "./AdminDashboard/main/pages/mainAppAdd/ItemsProductApp";
+import CreateItem from "./AdminDashboard/components/CreateItem";
+import BlogDetails from "./Layouth/main/pages/BlogDetails";
+import FeaturedCollectionsCart from "./Layouth/main/pages/FeaturedCollectionsCart";
 const router = createBrowserRouter([
     {
             path: "/",
@@ -58,7 +63,14 @@ const router = createBrowserRouter([
                 path: "mycart",
                 element: <Mycart/>,
             },
-           
+            {
+                path: "blog/:id",
+                element: <BlogDetails/>,
+            },
+            // {
+            //     path: "home/:id",
+            //     element: <FeaturedCollectionsCart/>,
+            // },
         ],
     },
     {
@@ -78,12 +90,24 @@ const router = createBrowserRouter([
     },
     //adminDashbord
     {
-        path: "AdminLayouth",
+        path: "/",
         element: <AdminLayouth/>,
         children: [
             {
                 path: "admin",
                 element: <AdminHome/>,
+            },
+            {
+                path: "/mainapp/:slug",
+                element: <ItemsAdd/>,
+            },
+            {
+                path: "/mainapp/:slug/:item",
+                element: <ItemsProductApp/>,
+            },
+            {
+                path: "/mainapp/CreateItem/:model",
+                element: <CreateItem/>,
             },
         ]
     }
