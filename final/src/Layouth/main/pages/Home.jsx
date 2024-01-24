@@ -20,7 +20,7 @@ function Home() {
   const [FeaturedCollectionsproduct, setFeaturedCollectionsproduct] = useState([])
   const FeaturedData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/FeaturedCollection',
+      const response = await fetch('http://38.242.233.112:499/api/FeaturedCollection',
       {});
       const data = await response.json();
       setFeaturedCollectionsproduct(data)
@@ -50,13 +50,20 @@ function Home() {
 </div>
 <div>
 <SliderTwo/>
+<div className=' flex justify-center items-center mt-10 flex-col'>
+  <h1 className='text-5xl font-semibold '>Featured Collection</h1>
+  <p className='text-sm pt-5'>If you’ve found our Theme to be helpful and you’re.</p>
+</div>
 <div className='flex justify-center md:space-x-10 mt-20 mb-20 flex-wrap'>
+
         {FeaturedCollectionsproduct.map((feat) => (
           <FeaturedCollectionsCart key={feat.id} FeaturedCollectionsproduct={feat} />
 
         ))}
       </div>
+<div>
 <Blog/>
+</div>
 <FollowInstagram/>
 
 </div>

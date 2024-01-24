@@ -54,7 +54,7 @@ function Cart({product}) {
       <div className="mt-4 px-5 pb-5">
         <div className='flex justify-between items-center'>
           <h5 className="text-2xl font-semibold tracking-tight text-slate-900">{product.name}</h5>
-         <button  onClick={() => Wish(product.id)}
+         <button  onClick={() => GoWish(product.id)}
  
          className={dynamicClassName}
          > <FaHeart /></button>

@@ -8,7 +8,7 @@ function AboutCreativeTeam() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/TeamView");
+        const response = await fetch("http://38.242.233.112:499/api/TeamView");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

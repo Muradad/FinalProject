@@ -23,13 +23,13 @@ export const FilterProvider = ({ children }) => {
   const fetchWithFilter = async () => {
     try {
         const token = window.localStorage.getItem('access')
-      const response = await fetch(`http://127.0.0.1:8000/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,
+      const response = await fetch(`http://38.242.233.112:499/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,
       {
         method: 'GET',
        
       });
       const data = await response.json();
-      console.log(`http://127.0.0.1:8000/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,'llasldalsldasd')
+      console.log(`http://38.242.233.112:499/api/products?size=${filterValues.size}&color=${filterValues.color}&brand=${filterValues.brand}&price__gte=${filterValues.price__lte}&price__lte=${filterValues.price__gte}&name=${filterValues.name}&stock__gte=${filterValues.stock__gte}`,'llasldalsldasd')
       setProductWF(data.results)
   } catch (error) {
       console.error('Error fetching data:', error);

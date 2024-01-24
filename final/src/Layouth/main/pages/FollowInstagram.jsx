@@ -25,10 +25,10 @@ function FollowInstagram() {
                             alt={`Instagram ${index + 1}`}
                         />
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-500">
-                            <div>
+                            <a href="https://www.instagram.com/mammedofmurad/?next=%2F">
                             <FaInstagram className="text-blue-800"  size={30}/>
 
-                            </div>
+                            </a>
                         </div>
                     </a>
                 ))}

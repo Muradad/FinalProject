@@ -1,19 +1,20 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaSearch, FaTwitter, FaInstagram, FaUserAlt, FaBars, FaTimes, FaHeart, } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoLogoGoogleplus } from "react-icons/io";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useSpring, animated } from 'react-spring';
-
+import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 import "./scss/Header.scss"
 import Basket from "./Basket";
 import LogAut from "./LogAut";
 import HeaderSearch from "./HeaderSearch";
+import { AuthContext } from "../../../context/AuthContext";
 
 function Header() {
-
+const {username,fetchData} = useContext(AuthContext)
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -54,6 +55,20 @@ function Header() {
 
   //Navbar scroll
   const [scrolled, setScrolled] = useState(false);
+  const handleHeartClick  = async () => {
+    await fetchData();
+    if (username) {
+      // If username is available, navigate to the wishlist
+      window.location.href = '/wishlist'; // Use your router's navigation method
+    } else {
+      // If username is not available, show a SweetAlert
+      Swal.fire({
+        icon: 'info',
+        title: 'Oops...',
+        text: 'You need to be logged in to access the wishlist!',
+      });
+    }
+  };
 
   const navbarAnimation = useSpring({
     backgroundColor: scrolled ? '#fff' : 'rgba(255, 255, 255, 0.8)',
@@ -93,9 +108,10 @@ function Header() {
         <Link>
           <LogAut/>
         </Link>
-        <Link to={"/wishlist"}>
-          <FaHeart className="cursor-pointer" />
-        </Link>
+
+        
+          <FaHeart onClick={handleHeartClick} className="cursor-pointer" />
+  
         <Basket/>
       </div>
 

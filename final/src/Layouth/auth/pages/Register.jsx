@@ -16,7 +16,7 @@ function Register() {
       if (confirm != password) {
         return;
       }
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch('http://38.242.233.112:499/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ export const BasketProvider = ({ children }) => {
    const token = window.localStorage.getItem('access')
   const GoBasket = async (product_id,quantity=null) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/basket', {
+      const response = await fetch('http://38.242.233.112:499/api/basket', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export const BasketProvider = ({ children }) => {
 
   const getBasketItems = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/getbasket',{
+      const response = await fetch('http://38.242.233.112:499/api/getbasket',{
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`

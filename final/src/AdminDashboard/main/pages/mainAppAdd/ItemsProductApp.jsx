@@ -4,12 +4,23 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 function ItemsProductApp() {
     const { slug,item } = useParams();
-    
+    const [fieldss, setFieldss] = useState([])
+    const fetchfieldData = async () => {
+      try {
+        const response = await fetch(`http://38.242.233.112:499/api/main/fields/mainapp/${slug}/`);
+        const data = await response.json();
+        console.log(data,'-----------------------------------------------------------------')
+        console.log(data,'fieldler')
+        setFieldss(data)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     const [data, setData] = useState([])
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/main/mainapp/${slug}/${item}/`);
+        const response = await fetch(`http://38.242.233.112:499/api/main/mainapp/${slug}/${item}/`);
         const data = await response.json();
         const parsedItems = JSON.parse(data);
         setData(parsedItems[0])
@@ -19,8 +30,9 @@ function ItemsProductApp() {
     };
     useEffect(() => {
       fetchData()
+      fetchfieldData()
     }, [])
-
+    console.log(data,'-3333333333333333333333333333333333333333333333333333333333333333333')
     const token = window.localStorage.getItem('access')
     const [inputValues, setInputValues] = useState({
         title: '',
@@ -36,12 +48,14 @@ function ItemsProductApp() {
           [name]: value,
         }));
       };
+
+
   const Edit = async () => {
     try {
       const nonEmptyValues = Object.fromEntries(
         Object.entries(inputValues).filter(([key, value]) => value !== '')
       );
-      const response = await fetch(`http://127.0.0.1:8000/api/main/edit/mainapp/${slug}/${item}/`, {
+      const response = await fetch(`http://38.242.233.112:499/api/main/edit/mainapp/${slug}/${item}/`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -61,74 +75,69 @@ function ItemsProductApp() {
       console.error('Bir hata oluştu:', error);
     }
   };
+  const Delete = async () => {
+    try {
+     
+      const response = await fetch(`http://38.242.233.112:499/api/main/delete/mainapp/${slug}/${item}/`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+         {}
+        )
+      });
 
-    if(data.fields){
+      if (response.ok) {
+        const newData = await response.json();
+        window.location = `/mainapp/${slug}/`
+        console.log('istek gonderildi:', newData);
+    fetchData()
+      } 
+    } catch (error) {
+      console.error('Bir hata oluştu:', error);
+    }
+  };
+
+
+
+    if(fieldss){
   return (
     <div>
       <div className='flex flex-col mt-20 mx-20 leading-10'>
       <h1 className='text-4xl'>{slug}</h1>
-      <h3 className='text-2xl pt-10'>{data.fields.name ? data.fields.name : data.fields.title}</h3>
+    
       <div className='mt-4'>
-        {data.fields.title ? (
-          <div className='mb-4'>
-            <label htmlFor="title" className='block text-sm font-medium text-gray-700'>
-              Title:
-            </label>
-            <input
-              className='mt-1 p-2 border border-gray-300 rounded-md focus:outline-none '
-              type="text"
-              onChange={handleInputChange}
-              name='title'
-              id='title'
-              placeholder={data.fields.title}
-            />
-          </div>
-        ) : (
-          <div className='mb-4= flex items-center gap-20 mb-10'>
-            <label htmlFor="name" className='block text-sm font-medium text-gray-700'>
-              Name:
-            </label>
-            <input
-              className='mt-1 p-2 border border-gray-300 rounded-md focus:outline-none '
-              type="text"
-              onChange={handleInputChange}
-              name='name'
-              id='name'
-              placeholder={data.fields.name}
-            />
-          </div>
-        )}
-        
-        {data.fields.description ? (
-          <div className='mb-4 flex items-center gap-11'>
-            <label htmlFor="description" className='flex justify-between items-center w-28  text-sm font-medium text-gray-700'>
-              Description:
-            </label>
-            <textarea
-              className='mt-1 p-2 w-[50%] border border-gray-300 rounded-md focus:outline-none '
-              type="textarea"
-              onChange={handleInputChange}
-              placeholder={data.fields.description}
-              name='description'
-              id='description'
-            />
-          </div>
-        ) : data.fields.content ?  (
-          <div className='flex'>
-            <label htmlFor="content" className='flex justify-between items-center w-28  text-sm font-medium text-gray-700'>
-              Content:
-            </label>
-            <input
-              className='mt-1 p-2 border border-gray-300 rounded-md focus:outline-none '
-              type="text"
-              onChange={handleInputChange}
-              placeholder={data.fields.content}
-              name='content'
-              id='content'
-            />
-          </div>
-        ):(<></>)}
-      <button onClick={Edit} className='bg-gray-500  px-10 mt-10   text-white'>Elave et</button>
+      {fieldss && fieldss.map((field) => (
+       field.name !== 'image' && field.name !== 'mainimage' && field.name !== 'backimage' && field.name !== 'color' && field.name !== 'hoverimage' 
+       && field.name !== 'size' && field.name !== 'brand' ? 
+      (
+        <div key={field.name} className="mb-4">
+          <label htmlFor={field.name} className="block text-gray-600 font-semibold mb-2">
+            {field.name}
+          </label>
+          {field.type=='foreign' ? <><select name='color' id='color'>
+            {field.name=='color' && filterData.colors ?
+            filterData.colors.map((color)=>(   <option value={color.id}>{color.name}</option>))
+         
+            :<></>}
+            
+            </select></>:   
+          <input 
+          
+            onChange={handleInputChange}
+            type={field.type}
+            id={field.name}
+            name={field.name}
+            placeholder={data.fields && data.fields[field.name] ? data.fields[field.name] : ""}
+            className="w-52 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+          />}
+       
+        </div>):<></>
+      ))}
+      <button onClick={Edit} className='bg-gray-500  px-10 mt-10 mx-10  text-white'>Deyisiklik et</button>
+      <button onClick={Delete} className='bg-gray-500  px-10 mt-10   text-white'>SIL</button>
 
       </div>
     </div>

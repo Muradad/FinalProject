@@ -11,7 +11,7 @@ function LogAut() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("access");
-      const response = await fetch('http://127.0.0.1:8000/api/check', {
+      const response = await fetch('http://38.242.233.112:499/api/check', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

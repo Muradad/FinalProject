@@ -7,7 +7,7 @@ function CartTwo3() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/products3');
+                const response = await fetch('http://38.242.233.112:499/api/products3');
                 const data = await response.json();
                 setCartTwo(data);
                 console.log(data, '9999999999999999999999');
@@ -37,9 +37,9 @@ function CartTwo3() {
                                     <div href="#">
                                         <h5 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{dt.name}</h5>
                                     </div>
-                                    <div className="flex items-center justify-evenly">
+                                    <div className="">
                                         <span className="text-SM font-bold text-gray-900 dark:text-white">{dt.price} AZN</span>
-                                        <span className="text-[12px]  text-gray-500  line-through">{dt.discount_price}</span>
+                                        <span className="text-[12px]  text-gray-500  line-through px-5">{dt.discount_price}</span>
 
                                     </div>
                                     <div className="flex items-center mt-2.5 mb-5">

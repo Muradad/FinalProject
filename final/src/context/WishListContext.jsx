@@ -11,7 +11,7 @@ export const WishlistProvider = ({ children }) => {
   const token = window.localStorage.getItem('access')
  const GoWish = async (product_id) => {
    try {
-     const response = await fetch('http://127.0.0.1:8000/api/wish', {
+     const response = await fetch('http://38.242.233.112:499/api/wish', {
        method: 'POST',
        headers: {
            Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ export const WishlistProvider = ({ children }) => {
  };
  const getWishlistItem = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/getbasket',{
+    const response = await fetch('http://38.242.233.112:499/api/getbasket',{
       method: 'GET',
       headers: {
           Authorization: `Bearer ${token}`

@@ -46,7 +46,7 @@ function CreateItem() {
             }
           });
       
-          const response = await fetch(`http://127.0.0.1:8000/api/main/create/mainapp/${model}`, {
+          const response = await fetch(`http://38.242.233.112:499/api/main/create/mainapp/${model}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ function CreateItem() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/main/fields/mainapp/${model}/`);
+        const response = await fetch(`http://38.242.233.112:499/api/main/fields/mainapp/${model}/`);
         const data = await response.json();
         console.log(data,'-----------------------------------------------------------------')
         console.log(data,'fieldler')

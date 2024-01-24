@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [product, setProduct] = useState([])
     const fetchData = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/products');
+            const response = await fetch('http://38.242.233.112:499/api/products');
             const data = await response.json();
             setProduct(data.results);
         } catch (error) {

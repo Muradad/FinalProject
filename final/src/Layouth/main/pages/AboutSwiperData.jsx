@@ -12,7 +12,7 @@ function AboutSwiperData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/test");
+        const response = await fetch("http://38.242.233.112:499/api/test");
         const data = await response.json();
         setQuotes(data);
       } catch (error) {
