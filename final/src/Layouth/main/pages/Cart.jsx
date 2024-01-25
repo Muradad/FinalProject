@@ -30,10 +30,12 @@ function Cart({product}) {
   };
   const isUserInWishlist = product.wishlist.some(wishlistItem => wishlistItem.username === username);
   const dynamicClassName = isUserInWishlist
+  
   ? 'border border-gray-600 p-2 rounded-md hover:bg-black hover:text-white duration-500 cursor-pointer bg-red-600 text-white'
   : 'border border-gray-600 p-2 rounded-md hover:bg-black hover:text-white duration-500 cursor-pointer bg-red-600 text-black';
 
   const newArray = Array.from({ length: product.rating }, (_, index) => index + 1);
+  console.log(dynamicClassName,'-----------------------------')
   return (
     <div
       className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md"
@@ -54,7 +56,7 @@ function Cart({product}) {
       <div className="mt-4 px-5 pb-5">
         <div className='flex justify-between items-center'>
           <h5 className="text-2xl font-semibold tracking-tight text-slate-900">{product.name}</h5>
-         <button  onClick={() => GoWish(product.id)}
+         <button  onClick={() => Wish(product.id)}
  
          className={dynamicClassName}
          > <FaHeart /></button>

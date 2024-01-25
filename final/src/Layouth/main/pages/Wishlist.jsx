@@ -15,19 +15,20 @@ function Wishlist() {
         },
       });
       const data = await response.json();
-      if (data.ok){
+    
+ 
       setWishlist(data)
-      }
+  
     } catch (error) {
 
-      console.error('Error fetching data:', error);
+      console.error('----------------------Error fetching data:', error);
     }
   };
   const SetWish = async (id) => {
     try {
       await GoWish(id);
       await getWish();
-  
+  console.log('0-o123123123123')
       
     } catch (error) {
       console.error("Wish işlemi sırasında hata oluştu:", error);
@@ -50,14 +51,14 @@ function Wishlist() {
     <div className='flex flex-wrap'>
       
      
-      {wishlist.length>1?(
+      {wishlist.length>0?(
       
         wishlist.map((product) => (
        
           <div key={product.id} className="p-4 overflow-y-auto mt-20" style={{ maxHeight: '60vh' }}>
             <div className="flex  mb-4">
               {/* Asagidaki koda fikir vermeyin gece 12 idi axod yox idi */}
-              <img src={"http://38.242.233.112:499/"+product.image} alt="Ürün Resmi" className="w-52 h-52 object-cover rounded" />
+              <img src={"http://38.242.233.112:499"+product.image} alt="Ürün Resmi" className="w-52 h-52 object-cover rounded" />
               <div className="ml-4">
                 <p className="text-sm font-semibold">{product.name}</p>
                 <p className="text-xs text-gray-500">{product.price} AZN</p>
